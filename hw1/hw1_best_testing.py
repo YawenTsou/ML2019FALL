@@ -3,6 +3,7 @@
 
 import pandas as pd
 import numpy as np
+from sklearn.neural_network import MLPRegressor
 import sys
 
 def testing_preprocess(group):
