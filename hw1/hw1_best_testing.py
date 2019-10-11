@@ -25,7 +25,7 @@ def test_data(test):
 
 if __name__ == "__main__":
     test = pd.read_csv(sys.argv[1])
-    with open('MLP(100,50,50)_2.pickle', 'rb') as f:
+    with open('MLP(100,50,50).pickle', 'rb') as f:
         model = pickle.load(f)
         
     key, test_x = test_data(test)
