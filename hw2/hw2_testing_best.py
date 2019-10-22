@@ -31,7 +31,7 @@ if __name__ == '__main__':
     
     train_x, test_x = normalize(train_x, test_x)
     
-    with open('rf(200).pickle', 'rb') as f:
+    with open('rf(200).pkl', 'rb') as f:
         rf = pickle.load(f)
     
     predicate = rf.predict(test_x)

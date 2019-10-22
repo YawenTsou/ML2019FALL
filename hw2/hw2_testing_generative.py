@@ -4,6 +4,10 @@ import pandas as pd
 import pickle
 import sys
 
+def sigmoid(z):
+    res =  1.0 / (1.0 + np.exp(-z))
+    return np.clip(res, 1e-8, 1-(1e-8))
+
 def predict(x_test, mu1, mu2, share_sigma, N1, N2):
     sigma_inverse = np.linalg.inv(share_sigma)
 
