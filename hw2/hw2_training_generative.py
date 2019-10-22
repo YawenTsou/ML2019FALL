@@ -4,6 +4,8 @@ import pandas as pd
 import pickle
 import sys
 
+dim = 106
+
 def sigmoid(z):
     res =  1.0 / (1.0 + np.exp(-z))
     return np.clip(res, 1e-6, 1-(1e-6))
