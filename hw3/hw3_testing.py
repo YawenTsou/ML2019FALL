@@ -87,6 +87,8 @@ if __name__ == '__main__':
     model.load_state_dict(torch.load('model_70.pth'))
     model.eval()
     
+    transform = transforms.Compose([transforms.ToTensor()])
+    
     with torch.no_grad():
         test_image = sorted(glob.glob(os.path.join(sys.argv[1], '*.jpg')))
         test_set = test_Dataset(test_image, transform)
