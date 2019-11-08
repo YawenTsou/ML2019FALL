@@ -34,6 +34,52 @@ class test_Dataset():
     
     def __len__(self):
         return len(self.data)
+    
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Sequential(
+            nn.Conv2d(1, 32, kernel_size=5, padding=2),
+            nn.LeakyReLU(negative_slope=0.05),
+            nn.BatchNorm2d(32),
+            nn.MaxPool2d(2),     
+        )
+        self.conv2 = nn.Sequential(
+            nn.Conv2d(32, 64, kernel_size=3, padding=1),
+            nn.LeakyReLU(negative_slope=0.05),
+            nn.BatchNorm2d(64),
+            nn.MaxPool2d(2),            
+        )
+        self.conv3 = nn.Sequential(
+            nn.Conv2d(64, 128, kernel_size=3,padding=1),
+            nn.LeakyReLU(negative_slope=0.05),
+            nn.BatchNorm2d(128),
+            nn.MaxPool2d(2),
+            
+        )
+        self.conv4 = nn.Sequential(
+            nn.Conv2d(128, 128, kernel_size=3,padding=1),
+            nn.LeakyReLU(negative_slope=0.05),
+            nn.BatchNorm2d(128),
+            nn.MaxPool2d(2),
+            
+        )
+        self.fc = nn.Sequential(
+            nn.Linear(3*3*128, 256),
+            nn.ReLU(),
+            nn.BatchNorm1d(256),
+            nn.Linear(256, 7)
+        )
+
+    def forward(self, x):
+        #image size (48,48)
+        x = self.conv1(x) #(24,24)
+        x = self.conv2(x) #(12,12)
+        x = self.conv3(x) #(6,6)
+        x = self.conv4(x) #(3,3)
+        x = x.view(-1, 3*3*128)
+        x = self.fc(x)
+        return x
 
 
 if __name__ == '__main__':
