@@ -106,7 +106,7 @@ if __name__ == '__main__':
         tests.append(test)
     
     model = DNN([x[1] for x in w2v])
-    model.load_state_dict(torch.load('model_14_BOW.pth'))
+    model.load_state_dict(torch.load('model_10_BOW.pth'))
     
     test_set = TestDataset(tests, w2v)
     test_loader = Data.DataLoader(test_set, collate_fn=test_set.collate_fn, batch_size=1, shuffle = False)
