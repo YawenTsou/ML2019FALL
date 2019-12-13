@@ -22,7 +22,7 @@ if __name__ == '__main__':
     tokenizer = spacy.lang.en.English().Defaults().create_tokenizer(nlp)
     
     train_x = pd.read_csv(sys.argv[1])
-    test_x = pd.read_csv(sys.argv[3])
+    test_x = pd.read_csv(sys.argv[2])
     
     f = open('corpus.csv', 'w')
     write(train_x, f, tokenizer)
