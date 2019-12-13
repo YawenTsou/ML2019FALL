@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import re
+import spacy
 from torch.utils.data import Dataset
 import torch.utils.data as Data
 import torch
@@ -87,6 +88,10 @@ class LSTMNet(nn.Module):
         return y.flatten()
 
 if __name__ == '__main__':
+    
+    nlp = spacy.load('en_core_web_lg')
+    tokenizer = spacy.lang.en.English().Defaults().create_tokenizer(nlp)
+    
     test_x = pd.read_csv(sys.argv[1])
     
     with open('w2v_final.pkl', 'rb') as f:
