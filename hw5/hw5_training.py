@@ -100,7 +100,7 @@ if __name__ == '__main__':
     train_x = pd.read_csv(sys.argv[1])
     train_y = pd.read_csv(sys.argv[2])
     
-    with open('w2v_final.pkl', 'rb') as f:
+    with open('w2v_1213.pkl', 'rb') as f:
         w2v = pickle.load(f)
         
     trains = []
@@ -112,6 +112,7 @@ if __name__ == '__main__':
         sent = train_x.loc[i, 'comment'].replace('@user ', '')
         sent = re.sub("[+\!\/\\_$%^*()+.,:\-\"“”]+|[+——！，。？、~@#￥%……&*（）：`]+", ' ', sent)
         sent = sent.replace('  ', ' ')
+        sent = sent.lower()
         for j in tokenizer(sent):
             tmp.append(str(j))
         train['comment'] = tmp

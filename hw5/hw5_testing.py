@@ -62,7 +62,7 @@ class LSTMNet(nn.Module):
         pretrained_embedding = torch.FloatTensor(pretrained_embedding)
         self.embedding = nn.Embedding(
             pretrained_embedding.size(0),
-            pretrained_embedding.size(1), padding_idx=1572)
+            pretrained_embedding.size(1), padding_idx=1515)
         self.embedding.weight = torch.nn.Parameter(pretrained_embedding)
         
         self.lstm = nn.LSTM(500, 800, 3, dropout=0.2, bidirectional=True, batch_first=True)
@@ -94,7 +94,7 @@ if __name__ == '__main__':
     
     test_x = pd.read_csv(sys.argv[1])
     
-    with open('w2v_final.pkl', 'rb') as f:
+    with open('w2v_1213.pkl', 'rb') as f:
         w2v = pickle.load(f)
         
     tests = []
@@ -105,13 +105,14 @@ if __name__ == '__main__':
         sent = test_x.loc[i, 'comment'].replace('@user ', '')
         sent = re.sub("[+\!\/\\_$%^*()+.,:\-\"“”]+|[+——！，。？、~@#￥%……&*（）：`]+", ' ', sent)
         sent = sent.replace('  ', ' ')
+        sent = sent.lower()
         for j in tokenizer(sent):
             tmp.append(str(j))
         test['comment'] = tmp
         tests.append(test)
     
     model = LSTMNet([x[1] for x in w2v])
-    model.load_state_dict(torch.load('LSTM(9).pth'))
+    model.load_state_dict(torch.load('model_6_1213.pth'))
     
     test_set = TestDataset(tests, w2v)
     test_loader = Data.DataLoader(test_set, collate_fn=test_set.collate_fn, batch_size=1, shuffle = False)

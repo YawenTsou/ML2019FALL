@@ -10,6 +10,7 @@ def write(file, f, tokenizer):
         sent = file.loc[i, 'comment'].replace('@user ', '')
         sent = re.sub("[+\!\/\\_$%^*()+.,:\-\"“”]+|[+——！，。？、~@#￥%……&*（）：`]+", ' ', sent)
         sent = sent.replace('  ', ' ')
+        sent = sent.lower()
         for j in tokenizer(sent):
             f.write(str(j))
             f.write(' ')
