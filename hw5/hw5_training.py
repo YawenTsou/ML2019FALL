@@ -66,7 +66,7 @@ class LSTMNet(nn.Module):
         pretrained_embedding = torch.FloatTensor(pretrained_embedding)
         self.embedding = nn.Embedding(
             pretrained_embedding.size(0),
-            pretrained_embedding.size(1), padding_idx=1572)
+            pretrained_embedding.size(1), padding_idx=1515)
         self.embedding.weight = torch.nn.Parameter(pretrained_embedding)
         
         self.lstm = nn.LSTM(500, 800, 3, dropout=0.2, bidirectional=True, batch_first=True)
